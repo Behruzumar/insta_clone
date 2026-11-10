@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Instagram - Ro'yxatdan o'tish{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block main_class %}auth-page{% endblock %}
+
+{% block style %}
+        .auth-title {
+            color: var(--muted);
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 20px;
+            margin: -12px 0 22px;
+        }
+
+        .date-label {
+            display: block;
+            margin: 14px 0 6px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: left;
+        }
+{% endblock %}
+
+{% block content %}
+    <div class="auth-box">
+
+        <h1 class="logo">Instagram</h1>
+
+        <p class="auth-title">
+            Do'stlaringizning rasm va videolarini ko'rish uchun ro'yxatdan o'ting.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label class="sr-only" for="name">To'liq ism</label>
+            <input
+                class="input"
+                id="name"
+                type="text"
+                name="name"
+                placeholder="To'liq ism"
+                value="{{ request.POST.name }}"
+                maxlength="150"
+                autocomplete="name"
+                autofocus
+                required
+            >
+
+            <label class="sr-only" for="username">Foydalanuvchi nomi</label>
+            <input
+                class="input"
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Foydalanuvchi nomi"
+                value="{{ request.POST.username }}"
+                maxlength="150"
+                autocomplete="username"
+                autocapitalize="none"
+                spellcheck="false"
+                required
+            >
+
+            <label class="sr-only" for="password">Parol</label>
+            <input
+                class="input"
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Parol"
+                autocomplete="new-password"
+                required
+            >
+
+            <label class="date-label" for="date">Tug'ilgan sana</label>
+            <input
+                class="input"
+                id="date"
+                type="date"
+                name="date"
+                value="{{ request.POST.date }}"
+                max="{% now 'Y-m-d' %}"
+                autocomplete="bday"
+                required
+            >
+
+            <button class="btn-primary btn-block" type="submit">
+                Ro'yxatdan o'tish
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="auth-switch">
+        Hisobingiz bormi?
+        <a href="{% url 'login' %}">Kirish</a>
+    </div>
+{% endblock %}

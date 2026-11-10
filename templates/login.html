@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Instagram - Kirish{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block main_class %}auth-page{% endblock %}
+
+{% block content %}
+    <div class="auth-box">
+
+        <h1 class="logo">Instagram</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label class="sr-only" for="username">Foydalanuvchi nomi</label>
+            <input
+                class="input"
+                id="username"
+                name="username"
+                type="text"
+                placeholder="Foydalanuvchi nomi"
+                value="{{ request.POST.username }}"
+                autocomplete="username"
+                autocapitalize="none"
+                spellcheck="false"
+                autofocus
+                required
+            >
+
+            <label class="sr-only" for="password">Parol</label>
+            <input
+                class="input"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Parol"
+                autocomplete="current-password"
+                required
+            >
+
+            <button class="btn-primary btn-block" type="submit">
+                Kirish
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="auth-switch">
+        Hisobingiz yo'qmi?
+        <a href="{% url 'register' %}">Ro'yxatdan o'ting</a>
+    </div>
+{% endblock %}
